@@ -1,15 +1,27 @@
+// invoke playSound when drum is clicked
 document.querySelectorAll(".drum").forEach(button => {
   button.addEventListener("click", function () {
-    const key = button.innerHTML;
-    const audioFileName = findFilePath(key);
-    if (audioFileName) {
-      const audio = new Audio(audioFileName)
-      audio.play();
-    } else {
-      console.log("Cannot play your audio.")
-    }
+    const clickedKey = button.innerHTML;
+    playSound(clickedKey)
   })
 })
+
+// invoke playSound on keyDown
+document.addEventListener("keydown", function(event) {
+  const pressedKey = event.key
+  playSound(pressedKey)
+})
+
+// handles playing a sound with keydown or click
+function playSound(key) {
+  const audioFileName = findFilePath(key);
+  if (audioFileName) {
+    const audio = new Audio(audioFileName)
+    audio.play();
+  } else {
+    console.log("Cannot play your audio.")
+  }
+}
 
 // For each key, find its consecutive file name of the sound
 function findFilePath (key) {
@@ -41,3 +53,4 @@ function findFilePath (key) {
   }
   return filePath;
 }
+
