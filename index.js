@@ -3,6 +3,7 @@ document.querySelectorAll(".drum").forEach(button => {
   button.addEventListener("click", function () {
     const clickedKey = button.innerHTML;
     playSound(clickedKey)
+    buttonAnimation(clickedKey)
   })
 })
 
@@ -10,6 +11,7 @@ document.querySelectorAll(".drum").forEach(button => {
 document.addEventListener("keydown", function(event) {
   const pressedKey = event.key
   playSound(pressedKey)
+  buttonAnimation(pressedKey)
 })
 
 // handles playing a sound with keydown or click
@@ -54,3 +56,11 @@ function findFilePath (key) {
   return filePath;
 }
 
+// create animation once key is clicked/pressed
+function buttonAnimation(key) {
+  let activeButton = document.querySelector(`.${key}`)
+  activeButton.classList.add("pressed")
+  setTimeout(function() {
+    activeButton.classList.remove("pressed")
+  }, 100)
+}
